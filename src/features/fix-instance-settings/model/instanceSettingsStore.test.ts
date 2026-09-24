@@ -5,8 +5,12 @@ import { useInstanceSettingsStore } from './instanceSettingsStore'
 import { REQUIRED_SETTINGS } from './settingsRequirements'
 
 const api = vi.hoisted(() => ({ getSettings: vi.fn(), setSettings: vi.fn() }))
+const session = vi.hoisted(() => ({ setOwnChatId: vi.fn() }))
 
-vi.mock('@/entities/session', () => ({ getApiClient: () => api, useSessionStore: vi.fn() }))
+vi.mock('@/entities/session', () => ({
+  getApiClient: () => api,
+  useSessionStore: { getState: () => session },
+}))
 vi.mock('@/shared/ui', () => ({ showToast: vi.fn() }))
 
 const validSettings = { webhookUrl: '', incomingWebhook: 'yes', outgoingWebhook: 'yes' }
@@ -16,6 +20,7 @@ describe('useInstanceSettingsStore', () => {
   beforeEach(() => {
     api.getSettings.mockReset()
     api.setSettings.mockReset()
+    session.setOwnChatId.mockReset()
     vi.mocked(showToast).mockReset()
     useInstanceSettingsStore.setState({ status: 'unknown', problems: [] })
     vi.spyOn(console, 'error').mockImplementation(() => {})
@@ -29,6 +34,12 @@ describe('useInstanceSettingsStore', () => {
     api.getSettings.mockResolvedValue(validSettings)
     await store().check()
     expect(store()).toMatchObject({ status: 'ok', problems: [] })
+  })
+
+  it('запоминает в сессии chatId аккаунта инстанса', async () => {
+    api.getSettings.mockResolvedValue({ ...validSettings, wid: '79991234567@c.us' })
+    await store().check()
+    expect(session.setOwnChatId).toHaveBeenCalledWith('79991234567@c.us')
   })
 
   it('неподходящие настройки — статус invalid со списком проблем', async () => {

@@ -19,6 +19,8 @@ export interface StateInstanceResponse {
 export type YesNo = 'yes' | 'no'
 
 export interface InstanceSettings {
+  /** chatId аккаунта инстанса: «79991234567@c.us». */
+  wid?: string
   webhookUrl?: string | null
   incomingWebhook?: YesNo
   outgoingWebhook?: YesNo

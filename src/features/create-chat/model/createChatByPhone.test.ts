@@ -4,8 +4,12 @@ import { GreenApiError } from '@/shared/api'
 import { createChatByPhone } from './createChatByPhone'
 
 const api = vi.hoisted(() => ({ checkWhatsapp: vi.fn(), getContactInfo: vi.fn() }))
+const session = vi.hoisted(() => ({ ownChatId: null as string | null }))
 
-vi.mock('@/entities/session', () => ({ getApiClient: () => api }))
+vi.mock('@/entities/session', () => ({
+  getApiClient: () => api,
+  useSessionStore: { getState: () => session },
+}))
 
 const chatId = '79991234567@c.us'
 /** Даёт завершиться фоновой загрузке имени контакта. */
@@ -16,11 +20,19 @@ describe('createChatByPhone', () => {
     api.checkWhatsapp.mockReset()
     api.getContactInfo.mockReset()
     useChatStore.getState().reset()
+    session.ownChatId = null
   })
 
   it('отклоняет то, что не похоже на номер, не обращаясь к API', async () => {
     expect(await createChatByPhone('abc')).toMatch(/международном формате/)
     expect(api.checkWhatsapp).not.toHaveBeenCalled()
+  })
+
+  it('не создаёт чат со своим номером, не обращаясь к API', async () => {
+    session.ownChatId = chatId
+    expect(await createChatByPhone('8 999 123-45-67')).toMatch(/номер вашего аккаунта/)
+    expect(api.checkWhatsapp).not.toHaveBeenCalled()
+    expect(useChatStore.getState().chats).toEqual({})
   })
 
   it('не создаёт чат для номера без WhatsApp', async () => {

@@ -1,5 +1,5 @@
 import { useChatStore } from '@/entities/chat'
-import { getApiClient } from '@/entities/session'
+import { getApiClient, useSessionStore } from '@/entities/session'
 import { GreenApiError } from '@/shared/api'
 import { normalizePhone, toChatId } from '@/shared/lib'
 
@@ -22,11 +22,16 @@ export async function createChatByPhone(input: string): Promise<string | null> {
   const phone = normalizePhone(input)
   if (!phone) return 'Введите номер в международном формате, например +7 999 123-45-67'
 
+  const chatId = toChatId(phone)
+  // checkWhatsapp свой номер пропускает: он тоже зарегистрирован в WhatsApp.
+  if (chatId === useSessionStore.getState().ownChatId) {
+    return 'Это номер вашего аккаунта. Введите номер собеседника.'
+  }
+
   try {
     const { existsWhatsapp } = await getApiClient().checkWhatsapp(phone)
     if (!existsWhatsapp) return 'Этот номер не зарегистрирован в WhatsApp'
 
-    const chatId = toChatId(phone)
     const chats = useChatStore.getState()
     chats.ensureChat(chatId)
     chats.openChat(chatId)

@@ -36,7 +36,9 @@ export const useInstanceSettingsStore = create<InstanceSettingsState>()((set, ge
     if (get().status === 'checking') return
     set({ status: 'checking' })
     try {
-      const problems = findSettingsProblems(await fetchSettings())
+      const settings = await fetchSettings()
+      useSessionStore.getState().setOwnChatId(settings.wid ?? null)
+      const problems = findSettingsProblems(settings)
       set({ status: problems.length ? 'invalid' : 'ok', problems })
     } catch (error) {
       // Проверка вспомогательная: если она не удалась, интерфейс работает как обычно.

@@ -8,6 +8,9 @@ interface SessionState {
   credentials: GreenApiCredentials | null
   /** Почему сессия завершилась без участия пользователя — показывается на экране входа. */
   logoutReason: string | null
+  /** chatId аккаунта инстанса из getSettings; null, пока настройки не загружены. */
+  ownChatId: string | null
+  setOwnChatId: (chatId: string | null) => void
   login: (credentials: GreenApiCredentials) => void
   logout: (reason?: string) => void
 }
@@ -17,8 +20,10 @@ export const useSessionStore = create<SessionState>()(
     (set) => ({
       credentials: null,
       logoutReason: null,
-      login: (credentials) => set({ credentials, logoutReason: null }),
-      logout: (reason) => set({ credentials: null, logoutReason: reason ?? null }),
+      ownChatId: null,
+      setOwnChatId: (ownChatId) => set({ ownChatId }),
+      login: (credentials) => set({ credentials, logoutReason: null, ownChatId: null }),
+      logout: (reason) => set({ credentials: null, logoutReason: reason ?? null, ownChatId: null }),
     }),
     {
       name: `${STORAGE_PREFIX}:session`,
