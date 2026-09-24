@@ -23,7 +23,7 @@ export async function verifyCredentials(credentials: GreenApiCredentials): Promi
   } catch (error) {
     if (isAuthError(error)) return 'Неверный idInstance или apiTokenInstance.'
     if (error instanceof GreenApiError && error.status === null) {
-      return 'Не удалось подключиться к GREEN-API. Проверьте интернет-соединение.'
+      return 'Не удалось подключиться к GREEN-API. Проверьте интернет-соединение и логин/пароль.'
     }
     if (error instanceof GreenApiError && error.status === 404) {
       return 'GREEN-API не нашёл инстанс. Проверьте idInstance.'
