@@ -5,6 +5,8 @@
 - Отправка — метод [`sendMessage`](https://green-api.com/v3/docs/api/sending/SendMessage/).
 - Получение — [HTTP API](https://green-api.com/v3/docs/api/receiving/technology-http-api/): `receiveNotification` + `deleteNotification`.
 
+Задеплоенно: https://skondor.github.io/test-task-green-api/
+
 ## Быстрый старт
 
 Нужны Node.js 20+ и pnpm.
