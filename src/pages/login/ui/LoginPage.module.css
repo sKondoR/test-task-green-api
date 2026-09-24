@@ -1,0 +1,61 @@
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  position: relative;
+  isolation: isolate;
+  padding: var(--space-24) var(--space-16);
+  background-color: var(--chat-ground);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  padding: var(--space-32) var(--space-28) var(--space-24);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.subtitle {
+  margin: 8px 0 24px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.notice {
+  margin: -8px 0 16px;
+  padding: var(--space-10) var(--space-12);
+  border-radius: var(--radius-m);
+  background: var(--color-warning-soft);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.help {
+  margin: 20px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.help a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.help a:hover {
+  text-decoration: underline;
+}

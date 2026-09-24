@@ -1,0 +1,21 @@
+.button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: var(--space-10) var(--space-12);
+  border: none;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--color-danger);
+  font: inherit;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus-visible {
+  background: var(--color-surface-hover);
+  outline: none;
+}

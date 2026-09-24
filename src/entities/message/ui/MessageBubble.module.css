@@ -1,0 +1,83 @@
+.row {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-2) 0;
+}
+
+.incoming {
+  align-items: flex-start;
+}
+
+.outgoing {
+  align-items: flex-end;
+}
+
+.bubble {
+  max-width: min(78%, 560px);
+  padding: var(--space-7) var(--space-10) var(--space-7) var(--space-12);
+  border-radius: var(--radius-bubble);
+  box-shadow: var(--shadow-bubble);
+  font-size: 15px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.incoming .bubble {
+  background: var(--color-bubble-in);
+  color: var(--color-text);
+}
+
+.outgoing .bubble {
+  background: var(--color-bubble-out);
+  color: var(--color-text);
+}
+
+.failed {
+  opacity: 0.85;
+}
+
+.text {
+  white-space: pre-wrap;
+}
+
+/* Время «обтекается» текстом справа снизу, как в MAX. */
+.meta {
+  position: relative;
+  top: 5px;
+  float: right;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 10px;
+  color: var(--color-text-tertiary);
+  font-size: 11px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.outgoing .meta {
+  color: var(--color-bubble-out-meta);
+}
+
+.errorIcon {
+  color: var(--color-danger);
+}
+
+.retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  padding: var(--space-2) var(--space-8);
+  border: none;
+  border-radius: 10px;
+  background: rgb(255 255 255 / 0.85);
+  color: var(--color-danger);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.retry:hover {
+  background: #fff;
+}

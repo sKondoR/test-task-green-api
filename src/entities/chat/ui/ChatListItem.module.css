@@ -1,0 +1,156 @@
+.row {
+  position: relative;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  min-height: 82px;
+  padding: var(--space-12) var(--space-16) var(--space-12) var(--space-18);
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.12s;
+}
+
+.item:hover {
+  background: var(--color-surface-hover);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
+
+.active,
+.active:hover {
+  background: var(--color-selected);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  padding-top: var(--space-2);
+}
+
+.top,
+.bottom {
+  display: flex;
+  gap: 8px;
+}
+
+.top {
+  align-items: baseline;
+}
+
+.bottom {
+  align-items: flex-start;
+}
+
+.name {
+  flex: 1;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  align-self: center;
+}
+
+.time {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+.statusSent {
+  color: var(--color-accent);
+}
+
+.statusMuted {
+  color: var(--color-text-secondary);
+}
+
+.statusError {
+  color: var(--color-danger);
+}
+
+.preview {
+  display: -webkit-box;
+  flex: 1;
+  overflow: hidden;
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.you {
+  color: var(--color-text);
+}
+
+.badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  padding: 0 var(--space-6);
+  border-radius: 10px;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.action {
+  position: absolute;
+  top: var(--space-8);
+  right: var(--space-10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s;
+}
+
+/* При наведении кнопка действия встаёт на место времени. */
+.row:hover .action,
+.row:focus-within .action {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.row:hover .meta,
+.row:focus-within .meta {
+  visibility: hidden;
+}
+
+/* На сенсорных экранах наведения нет: кнопка видна у открытого чата. */
+@media (hover: none) {
+  .activeRow .action {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .activeRow .meta {
+    visibility: hidden;
+  }
+}

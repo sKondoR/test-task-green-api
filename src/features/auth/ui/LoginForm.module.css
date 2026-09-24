@@ -1,0 +1,19 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formError {
+  margin: 0;
+  padding: var(--space-10) var(--space-12);
+  border-radius: var(--radius-m);
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.submit {
+  margin-top: 4px;
+}

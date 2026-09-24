@@ -1,0 +1,93 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-m);
+  background: var(--color-surface-muted);
+  transition:
+    border-color 0.15s,
+    background-color 0.15s;
+}
+
+.control:focus-within {
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+}
+
+.control[data-invalid] {
+  border-color: var(--color-danger);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 var(--space-14);
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 15px;
+  outline: none;
+  border-radius: calc(var(--radius-m) - 1px);
+}
+
+/* Автозаполнение Chrome красит инпут своим фоном поверх рамки .control —
+   перекрываем его фоном поля через inset-тень. */
+.input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 100px var(--color-surface-muted) inset;
+  -webkit-text-fill-color: var(--color-text);
+  caret-color: var(--color-text);
+}
+
+.control:focus-within .input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 100px var(--color-surface) inset;
+}
+
+.input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.reveal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.reveal:hover {
+  color: var(--color-text);
+}
+
+.hint,
+.error {
+  margin: 0;
+  font-size: 13px;
+}
+
+.hint {
+  color: var(--color-text-tertiary);
+}
+
+.error {
+  color: var(--color-danger);
+}

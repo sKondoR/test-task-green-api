@@ -1,0 +1,86 @@
+/* Дизайн-токены. Тема одна — светлая, по мотивам web.max.ru. */
+:root {
+  --font-family:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+
+  --color-accent: #1f8bff;
+  --color-accent-hover: #0f78ea;
+  --color-on-accent: #fff;
+  --color-focus: rgb(31 139 255 / 0.55);
+
+  --color-text: #0f0f10;
+  --color-text-secondary: #7a7a80;
+  --color-text-tertiary: #a2a2a8;
+
+  --color-surface: #fff;
+  --color-surface-muted: #f1f1f4;
+  --color-surface-hover: #f4f4f6;
+  --color-selected: #eaf3ff;
+  --color-border: #ececf0;
+
+  --color-danger: #e53935;
+  --color-danger-soft: #fdecec;
+  --color-warning: #f29d0b;
+  --color-warning-soft: #fff6e0;
+  --color-warning-border: #fbe3a8;
+
+  --color-bubble-in: #fff;
+  --color-bubble-out: #e1f0ff;
+  --color-bubble-out-meta: #5b95cc;
+  --color-chip-on-pattern: rgb(52 124 204 / 0.55);
+
+  /*
+   * Фон переписки из трёх слоёв, как в web.max.ru (см. shared/ui/ChatBackground):
+   * базовый градиент → радиальные подсветки → узор (SVG-маска, залитая своими градиентами).
+   * Значения взяты из светлой темы MAX; подсветки в ней прозрачные.
+   */
+  --chat-ground: #7ab7e4;
+
+  --chat-background-background-step-1: #99d5d7;
+  --chat-background-background-step-2: #80bcff;
+
+  --chat-background-additional-step-1: #0000;
+  --chat-background-additional-step-2: #0000;
+  --chat-background-additional-step-3: #0000;
+  --chat-background-additional-step-4: #0000;
+  --chat-background-additional-step-5: #0000;
+  --chat-background-additional-step-6: #0000;
+
+  --chat-background-pattern-step-1: #0000;
+  --chat-background-pattern-step-2: #0000;
+  --chat-background-pattern-step-3: #0000;
+  --chat-background-pattern-step-4: #0000;
+  --chat-background-pattern-step-5: #0000;
+  --chat-background-pattern-step-6: #0000;
+  --chat-background-pattern-gradient-step-1: #007aff4d;
+  --chat-background-pattern-gradient-step-2: #007aff4d;
+
+  --chat-pattern-url: url('/pattern_space.svg');
+
+  /* Отступы (padding): имя = значение в пикселях. */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-7: 7px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+
+  --radius-s: 10px;
+  --radius-m: 12px;
+  --radius-l: 16px;
+  --radius-bubble: 18px;
+
+  --shadow-bubble: 0 1px 1.5px rgb(0 0 0 / 0.1);
+  --shadow-popover: 0 8px 28px rgb(0 0 0 / 0.14), 0 1px 3px rgb(0 0 0 / 0.08);
+  --shadow-card: 0 24px 64px rgb(20 60 120 / 0.28);
+
+  --chat-column-width: 740px;
+}

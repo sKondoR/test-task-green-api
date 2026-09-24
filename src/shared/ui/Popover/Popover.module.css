@@ -1,0 +1,33 @@
+.root {
+  position: relative;
+}
+
+.panel {
+  position: absolute;
+  z-index: 20;
+  min-width: 220px;
+  padding: var(--space-6);
+  border-radius: var(--radius-l);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-popover);
+  animation: appear 0.12s ease-out;
+}
+
+.bottom-end {
+  top: calc(100% + 8px);
+  right: 0;
+  transform-origin: top right;
+}
+
+.top-start {
+  bottom: calc(100% + 8px);
+  left: 0;
+  transform-origin: bottom left;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
