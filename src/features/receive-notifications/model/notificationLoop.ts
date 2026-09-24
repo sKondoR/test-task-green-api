@@ -58,7 +58,12 @@ export async function runNotificationLoop({
       try {
         onNotification(notification.body)
       } catch (error) {
-        console.error('Failed to handle notification', notification, error)
+        // Без тела уведомления: в нём текст переписки и данные собеседника.
+        console.error(
+          'Failed to handle notification',
+          { receiptId: notification.receiptId, typeWebhook: notification.body.typeWebhook },
+          error,
+        )
       }
       await client.deleteNotification(notification.receiptId, signal)
     } catch (error) {

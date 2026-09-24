@@ -42,6 +42,17 @@ describe('toTextMessageEvent', () => {
     expect(event).toMatchObject({ direction: 'outgoing', contactName: 'Даша' })
   })
 
+  it('заменяет отсутствующее или некорректное время текущим', () => {
+    for (const timestamp of [undefined, Number.NaN, Infinity, -1, 1e20, '1758700000']) {
+      const event = toTextMessageEvent({
+        ...incoming,
+        timestamp: timestamp as NotificationBody['timestamp'],
+      })
+      expect(() => new Date(event!.timestamp).toISOString()).not.toThrow()
+      expect(Math.abs(event!.timestamp - Date.now())).toBeLessThan(1000)
+    }
+  })
+
   it('игнорирует нетекстовые сообщения и служебные уведомления', () => {
     expect(
       toTextMessageEvent({ ...incoming, messageData: { typeMessage: 'imageMessage' } }),

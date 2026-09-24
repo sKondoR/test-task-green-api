@@ -27,6 +27,15 @@ function extractText(body: NotificationBody): string | undefined {
   return undefined
 }
 
+/**
+ * Секунды из уведомления → миллисекунды. Некорректное время заменяется текущим:
+ * с ним `new Date(...).toISOString()` бросил бы RangeError и ронял рендер ленты.
+ */
+function toMilliseconds(seconds: unknown): number {
+  const ms = typeof seconds === 'number' ? seconds * 1000 : NaN
+  return Number.isFinite(ms) && ms > 0 && ms <= 8.64e15 ? ms : Date.now()
+}
+
 /** Достаёт текстовое сообщение из уведомления; для всего остального — null. */
 export function toTextMessageEvent(body: NotificationBody): TextMessageEvent | null {
   const direction = DIRECTION_BY_WEBHOOK[body.typeWebhook]
@@ -44,7 +53,7 @@ export function toTextMessageEvent(body: NotificationBody): TextMessageEvent | n
     idMessage: body.idMessage,
     chatId,
     text,
-    timestamp: (body.timestamp ?? Math.floor(Date.now() / 1000)) * 1000,
+    timestamp: toMilliseconds(body.timestamp),
     direction,
     contactName: contactName?.trim() || undefined,
   }

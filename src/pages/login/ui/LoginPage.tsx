@@ -13,7 +13,7 @@ export function LoginPage() {
       <div className={styles.card}>
         <h1 className={styles.title}>Вход в WhatsApp Chat</h1>
         <p className={styles.subtitle}>
-          Введите данные инстанса GREEN-API, чтобы отправлять и получать сообщения в WhatsApp.
+          Введите данные инстанса GREEN-API, чтобы отправлять и получать сообщения в WhatsApp.<br />Дизайн от мессенджера MAX.
         </p>
         {logoutReason && (
           <p className={styles.notice} role="alert">
